@@ -1,10 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, ActivityIndicator, View } from 'react-native';
+import { Provider } from 'react-redux';
 import Tabs from './navigation';
+import store from './redux/store';
 
-export default function App() {
+function App() {
   return (
-    <Tabs />
+    <Provider store={store}>
+          <Tabs/>
+    </Provider>
   );
 }
 
@@ -12,7 +15,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
+
+export default App;
