@@ -6,7 +6,11 @@ import store from './redux/store';
 function App() {
   return (
     <Provider store={store}>
+      <View style={styles.container}>
+        { store.loaded ? <ActivityIndicator /> : (
           <Tabs/>
+        )}
+      </View>
     </Provider>
   );
 }

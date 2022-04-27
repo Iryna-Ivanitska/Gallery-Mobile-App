@@ -1,15 +1,11 @@
-import { useEffect, useState } from 'react';
-import { StyleSheet, ActivityIndicator, Text, View } from 'react-native';
-import { FlatList } from 'react-native-web';
+import { useEffect } from 'react';
+import { StyleSheet, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import {PictureItem} from '../components/PictureItem';
-import { getData } from '../redux/Actions';
+import Search from '../components/search';
+import { favoriteToggle, getData } from '../redux/Actions';
 
 const Pictures = (props) => {
-  const [isLoading, setLoading] = useState(true);
-
-  console.log(props)
-
   const getPictures = async () => {
     try {
       const response = await fetch('https://jsonplaceholder.typicode.com/photos?albumId=1');
@@ -18,9 +14,7 @@ const Pictures = (props) => {
       props.getData(pic)
     } catch (error) {
       console.error(error);
-    } finally {
-      setLoading(false)
-    }
+    } 
   };
 
  useEffect(() => {
@@ -28,27 +22,22 @@ const Pictures = (props) => {
  }, []);
 
   return (
-    <View >
-      { isLoading ? <ActivityIndicator /> : (
-          <View>
-            <Text>Pictures!</Text>
-            <FlatList data={props.pictures} renderItem={ ({item}) =>
-              <PictureItem img={item}/>
-            }/>
-            {/* <Text>{props.pictures[0].title}</Text> */}
-          </View>
-        )}
-    </View>
+    <>
+      <Search />
+      <FlatList data={props.filteredArray} renderItem={ ({item}) =>
+        <PictureItem img={item}/>
+      }/>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-
+  container: {
+    flex: 1,
+  },
 });
 
-const mapStateToProps = (state) => {
-  return {pictures: state.pictures}
-}
+const mapStateToProps = (state) => state
 const mapDispatchToProps = (dispatch) => {
   return {
     favoriteToggle: (id) => dispatch(favoriteToggle(id)),

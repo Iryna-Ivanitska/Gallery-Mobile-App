@@ -1,24 +1,40 @@
-import { StyleSheet, View, Image } from 'react-native';
+import { StyleSheet, View, Image, Text } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 
 export const PictureItem = ({img}) => {
-  console.log(img)
   return (
-    <View style={styles.container}>
+    <View style={styles.item}>
       <Image 
         source={{
           uri: img.thumbnailUrl,
-          width: 150,
-          height: 150
         }}
+        style={{width: '100%', height: 150}}
       />
+      <View style={styles.info}>
+        <Text>{img.title}</Text>
+        <Ionicons name="heart-outline" size={24} color="black"/>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  item: {
+    width: '80%',
+    marginLeft: '10%',
     flex: 1,
-    backgroundColor: '#fff',
+    alignItems: 'center',
+    marginTop: 20,
+    borderWidth: 1,
+    padding: 5
+  },
+  info: {
+    flex: 1,
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: '5',
+    alignItems: 'center'
   },
 });

@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
-import pictureReducer from './Reducers';
+import PictureReducer from './Reducers';
 
-const store = configureStore({reducer: pictureReducer})
+const store = configureStore({reducer: PictureReducer})
 
 export default store;

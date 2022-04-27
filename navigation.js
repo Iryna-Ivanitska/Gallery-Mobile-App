@@ -11,17 +11,18 @@ export default function Tabs() {
     <NavigationContainer>
       <Tab.Navigator 
         screenOptions={{
-          tabBarLabelPosition: 'beside-icon'
+          tabBarLabelPosition: 'beside-icon',
+          cardStyle: {height: "100%"}
         }}
         >
         <Tab.Screen 
-          name="Pictures" 
+          name="Photos" 
           component={Pictures} 
           options={{
             tabBarIcon:() => <SimpleLineIcons name="picture" size={24} color="black" />
           }}
           />
-        <Tab.Screen name="Favorite pictures" component={Favorite} 
+        <Tab.Screen name="Favorites" component={Favorite} 
           options={{
             tabBarIcon:() => <SimpleLineIcons name="heart" size={24} color="black" />
           }}/>

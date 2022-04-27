@@ -1,24 +1,34 @@
-import { FAVORITE, FETCH_DATA } from "./Actions"
+import { FAVORITE, FETCH_DATA, SEARCH_PICTURES } from "./Actions"
 
 const initialState = {
-  pictures: []
+  pictures: [],
+  loaded: false,
+  searchText: '',
+  filteredArray: []
 }
 
-const pictureReducer = (state = initialState, action) => {
+const PictureReducer = (state = initialState, action) => {
   switch (action.type) { 
     case FAVORITE: {
       console.log(action.id)
       return;
     }
     case FETCH_DATA: {
-      console.log(action.data)
       return {
         ...state,
-        pictures: action.data
+        pictures: action.data,
+        filteredArray: action.data,
+        loaded: true
       }
+    }
+    case SEARCH_PICTURES: {
+      return {
+        ...state,
+        filteredArray: state.pictures.filter( el => el.title.includes(action.text))
+      }  
     }
     default: return state
   } 
 }
 
-export default pictureReducer;
+export default PictureReducer;
