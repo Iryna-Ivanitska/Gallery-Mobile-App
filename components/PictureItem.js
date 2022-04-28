@@ -1,19 +1,26 @@
 import { StyleSheet, View, Image, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { favoriteToggle } from '../redux/Actions';
+import { connect } from 'react-redux';
 
 
-export const PictureItem = ({img}) => {
+const PictureItem = (props) => {
   return (
     <View style={styles.item}>
       <Image 
         source={{
-          uri: img.thumbnailUrl,
+          uri: props.img.thumbnailUrl,
         }}
         style={{width: '100%', height: 150}}
       />
       <View style={styles.info}>
-        <Text>{img.title}</Text>
-        <Ionicons name="heart-outline" size={24} color="black"/>
+        <Text>{props.img.title}</Text>
+        <Ionicons 
+          name={!props.img.isFavorite ? "heart-outline" : "heart-sharp" }
+          size={24} 
+          color="black"
+          onPress={() => props.favoriteToggle(props.img)}  
+        />
       </View>
     </View>
   );
@@ -38,3 +45,12 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
 });
+
+const mapStateToProps = (state) => state
+const mapDispatchToProps = (dispatch) => {
+  return {
+    favoriteToggle: (img) => dispatch(favoriteToggle(img)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PictureItem)

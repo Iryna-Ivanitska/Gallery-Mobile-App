@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { searchPictures } from '../redux/Actions';
 
 function Search(props) {
-  console.log(props.filteredArray)
+  
   return (
     <View >
       <TextInput 

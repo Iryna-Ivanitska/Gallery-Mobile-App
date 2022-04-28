@@ -10,9 +10,9 @@ export const getData = (dataArray) => {
     };
 }
 
-export const favoriteToggle = (id) => ({
-  type: CHANGE_BY_AMOUNT,
-  id: id,
+export const favoriteToggle = (img) => ({
+  type: FAVORITE,
+  img: img,
 })
 
 export const searchPictures = (text) => ({
