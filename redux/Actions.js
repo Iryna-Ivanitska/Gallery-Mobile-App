@@ -2,28 +2,18 @@ export const FAVORITE = "FAVORITE"
 export const FETCH_DATA = 'FETCH_DATA'
 export const SEARCH_PICTURES = 'SEARCH_PICTURES'
 
+export const getPictures = () => {
+  fetch("https://jsonplaceholder.typicode.com/photos?albumId=1")
+   .then(response => response.json())
+   .then (pic => pic.map((el) => ({ ...el, isFavorite: false })))
+   .then( pic => getData(pic));
+};
 
-// export const getData = (dataArray) => {
-//     return {
-//         type: FETCH_DATA,
-//         data: dataArray
-//     };
-// }
-export const getData = async () => {
-  try {
-    const response = await fetch(
-      "https://jsonplaceholder.typicode.com/photos?albumId=1"
-    );
-    const json = await response.json();
-    const pic = json.map((el) => ({ ...el, isFavorite: false }));
+export const getData = (dataArray) => {
     return {
-      type: FETCH_DATA,
-      data: pic
+        type: FETCH_DATA,
+        data: dataArray
     };
-  } catch (error) {
-    console.error(error);
-  }
-    
 }
 
 export const favoriteToggle = (img) => ({

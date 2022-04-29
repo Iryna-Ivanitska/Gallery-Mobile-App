@@ -3,12 +3,12 @@ import { StyleSheet, FlatList } from "react-native";
 import { connect } from "react-redux";
 import PictureItem from "../components/PictureItem";
 import Search from "../components/search";
-import { favoriteToggle, getData } from "../redux/Actions";
+import { favoriteToggle, getData, getPictures } from "../redux/Actions";
 
 const Pictures = (props) => {
 
   useEffect(() => {
-    props.getData();
+    getPictures()
   }, []);
 
   return (
@@ -34,7 +34,7 @@ const mapStateToProps = (state) => state;
 const mapDispatchToProps = (dispatch) => {
   return {
     favoriteToggle: (img) => dispatch(favoriteToggle(img)),
-    getData: () => dispatch(getData),
+    getData: (data) => dispatch(getData(data)),
   };
 };
 
