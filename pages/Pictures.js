@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { StyleSheet, FlatList } from "react-native";
 import { connect } from "react-redux";
 import PictureItem from "../components/PictureItem";
 import Search from "../components/search";
-import { favoriteToggle, getData, getPictures } from "../redux/Actions";
+import { favoriteToggle, getPictures } from "../redux/Actions";
 
 const Pictures = (props) => {
 
@@ -34,7 +34,6 @@ const mapStateToProps = (state) => state;
 const mapDispatchToProps = (dispatch) => {
   return {
     favoriteToggle: (img) => dispatch(favoriteToggle(img)),
-    getData: (data) => dispatch(getData(data)),
   };
 };
 
